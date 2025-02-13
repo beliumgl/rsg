@@ -1,7 +1,7 @@
 #include <include/charset.hpp>
 
 namespace RSG {
-    Charset::Charset(std::string_view charset) {
+    Charset::Charset(const std::string_view& charset) {
         std::string capitalLettersCharset;
         std::string lowercaseLettersCharset;
         std::string digitsCharset;

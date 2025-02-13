@@ -24,7 +24,7 @@ namespace RSG {
          *      - mode 2: generates a highly secure string.
          */
 
-        RSG(std::string_view charset, unsigned short length, unsigned char mode)
+        RSG(const std::string_view& charset, unsigned short length, unsigned char mode)
             : charset(charset), length(length), rules(Rules(mode)) {}
 
         std::string Generate();

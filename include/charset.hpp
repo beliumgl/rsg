@@ -21,7 +21,7 @@ namespace RSG {
         std::string specialCharactersCharset;
         std::string otherCharset;
     public:
-        Charset(std::string_view charset);
+        Charset(const std::string_view& charset);
         ECharset GetCharset(char c);
 
         // Getters
