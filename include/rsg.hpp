@@ -3,12 +3,14 @@
 #include <string>
 #include <string_view>
 
+#include <include/rules.hpp>
+
 namespace RSG {
     class RSG {
     private:
         std::string_view charset;
         unsigned short length;
-        unsigned char mode;
+        Rules rules;
     public:
         /*
          * Constructor for the Random String Generator (RSG).
@@ -23,7 +25,7 @@ namespace RSG {
          */
 
         RSG(std::string_view charset, unsigned short length, unsigned char mode)
-            : charset(charset), length(length), mode(mode) {}
+            : charset(charset), length(length), rules(Rules(mode)) {}
 
         std::string Generate();
     };
