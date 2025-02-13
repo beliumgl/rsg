@@ -35,7 +35,7 @@ namespace RSG {
         };
     }
 
-    std::map<std::string, std::optional<unsigned char>> Rules::GetRules() {
+    std::map<std::string, std::optional<unsigned short>> Rules::GetRules() {
         return {
             {"MAX_REPEAT_OF_THE_SAME_CHARACTER_CATEGORY", this->MAX_REPEAT_OF_THE_SAME_CHARACTER_CATEGORY},
             {"MAX_REPEAT_OF_THE_SAME_CHARACTER", this->MAX_REPEAT_OF_THE_SAME_CHARACTER},

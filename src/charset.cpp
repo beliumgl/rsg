@@ -33,6 +33,24 @@ namespace RSG {
         this->otherCharset = otherCharset;
     }
 
+    std::unique_ptr<std::string_view> Charset::GetCharset(char c) {
+        if (std::isupper(c)) {
+            return std::make_unique<std::string_view>(this->capitalLettersCharset);
+        }
+        else if (std::islower(c)) {
+            return std::make_unique<std::string_view>(this->lowercaseLettersCharset);
+        }
+        else if (std::isdigit(c)) {
+            return std::make_unique<std::string_view>(this->digitsCharset);
+        }
+        else if (!std::isalnum(c)) {
+            return std::make_unique<std::string_view>(this->specialCharactersCharset);
+        }
+        else {
+            return std::make_unique<std::string_view>(this->otherCharset);
+        }
+    }
+
     std::string_view Charset::GetCapialLettersCharset() {
         return this->capitalLettersCharset;
     }

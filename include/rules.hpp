@@ -25,15 +25,15 @@ namespace RSG {
         bool MAX_REPEAT_OF_THE_SAME_CHARACTER_CATEGORY_REQUIRED = false;
         bool MAX_REPEAT_OF_THE_SAME_CHARACTER_REQUIRED = false;
         bool MAX_REPEAT_OF_THE_SAME_CHARACTER_IN_DIFFERENT_CATEGORIES_REQUIRED = false;
-        std::optional<unsigned char> MAX_REPEAT_OF_THE_SAME_CHARACTER_CATEGORY;                        // This variable specifies the maximum number of consecutive characters allowed from the same category (e.g., AAAAA, aaaaa, @@@@@).
-        std::optional<unsigned char> MAX_REPEAT_OF_THE_SAME_CHARACTER;                                 // This variable specifies the maximum number of consecutive occurrences of the same character (e.g., aaaaa, bbbbb, !!!!!).
-        std::optional<unsigned char> MAX_REPEAT_OF_THE_SAME_CHARACTER_IN_DIFFERENT_CATEGORIES;         // This variable specifies the maximum number of occurrences of the same character across different categories (e.g., AaaAa, BbbBBb, oOoOO).
+        std::optional<unsigned short> MAX_REPEAT_OF_THE_SAME_CHARACTER_CATEGORY;                        // This variable specifies the maximum number of consecutive characters allowed from the same category (e.g., AAAAA, aaaaa, @@@@@).
+        std::optional<unsigned short> MAX_REPEAT_OF_THE_SAME_CHARACTER;                                 // This variable specifies the maximum number of consecutive occurrences of the same character (e.g., aaaaa, bbbbb, !!!!!).
+        std::optional<unsigned short> MAX_REPEAT_OF_THE_SAME_CHARACTER_IN_DIFFERENT_CATEGORIES;         // This variable specifies the maximum number of occurrences of the same character across different categories (e.g., AaaAa, BbbBBb, oOoOO).
     public:
         Rules(unsigned char mode);
 
         // Getters
-        std::map<std::string, bool> GetRequires();                          // Return all *_REQUIRED variables
-        std::map<std::string, std::optional<unsigned char>> GetRules();     // Return all rule variables
+        std::map<std::string, bool> GetRequires();                           // Return all *_REQUIRED variables
+        std::map<std::string, std::optional<unsigned short>> GetRules();     // Return all rule variables
     };
 }
 

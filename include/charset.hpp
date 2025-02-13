@@ -2,6 +2,7 @@
 
 #include <string>
 #include <string_view>
+#include <memory>
 
 namespace RSG {
     class Charset {
@@ -13,6 +14,7 @@ namespace RSG {
         std::string otherCharset;
     public:
         Charset(std::string_view charset);
+        std::unique_ptr<std::string_view> GetCharset(char c);
 
         // Getters
         std::string_view GetCapialLettersCharset();
