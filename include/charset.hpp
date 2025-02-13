@@ -5,6 +5,14 @@
 #include <memory>
 
 namespace RSG {
+    enum ECharset {
+        CAPITAL_LETTERS,
+        LOWERCASE_LETTERS,
+        DIGITS,
+        SPECIAL_CHARACTERS,
+        OTHER
+    };
+
     class Charset {
     private:
         std::string capitalLettersCharset;
@@ -14,7 +22,7 @@ namespace RSG {
         std::string otherCharset;
     public:
         Charset(std::string_view charset);
-        std::unique_ptr<std::string_view> GetCharset(char c);
+        ECharset GetCharset(char c);
 
         // Getters
         std::string_view GetCapialLettersCharset();

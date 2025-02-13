@@ -18,7 +18,7 @@ namespace RSG {
         std::optional<unsigned short> repeatedCharacterCount;
         std::optional<unsigned short> repeatedCharacterInTheDifferentCategoriesCount;
         std::optional<char> usedCharacter;
-        std::optional<std::unique_ptr<std::string_view>> usedCategory;
+        std::optional<ECharset> usedCategory;
 
         if (requires.at("MAX_REPEAT_OF_THE_SAME_CHARACTER_CATEGORY_REQUIRED")) {
             repeatedCharacterCount = 0;
@@ -36,7 +36,6 @@ namespace RSG {
             GENERATE_CHAR:
             std::uniform_int_distribution<size_t> dist(0, this->charset.size());
             char randomChar = this->charset[dist(rd)];
-
 
             if (randomChar == '\0') {
                 goto GENERATE_CHAR;
