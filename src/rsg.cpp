@@ -32,6 +32,18 @@ namespace RSG {
             charset = Charset(this->charset);
         }
 
+        /*
+         * Algorithm:
+         *  - Iterate from 0 to the specified length.
+         *  - Generate a potential character using a random device.
+         *  - Check the ruleset.
+         *  - Based on the rules, perform the following checks:
+         *      - If the character violates the ruleset, restart the generation process.
+         *      - If the character meets the ruleset, append it to the result:
+         *          - Increment the relevant "repeated" counters if the conditions are met.
+         *          - Reset the "repeated" counters if the conditions are not met.
+         *          - Update usedCharacter and usedCategory to reflect the properties of the generated character.
+         */
         for (size_t i{ 0 }; i < length; ++i) {
             GENERATE_CHAR:
                 std::uniform_int_distribution<size_t> dist(0, this->charset.size());
@@ -58,35 +70,34 @@ namespace RSG {
                 {
                     goto GENERATE_CHAR;
                 }
-                result.push_back(randomChar);
-                if (requires.at("MAX_REPEAT_OF_THE_SAME_CHARACTER_CATEGORY_REQUIRED")) {
+            result.push_back(randomChar);
+            if (requires.at("MAX_REPEAT_OF_THE_SAME_CHARACTER_CATEGORY_REQUIRED")) {
                     if (usedCategory.has_value() && charset->GetCharset(randomChar) == usedCategory.value()) {
-                        ++repeatedSameCategoryCount.value();
-                    }
-                    else {
-                        repeatedSameCategoryCount = 0;
-                    }
+                    ++repeatedSameCategoryCount.value();
                 }
-                if (requires.at("MAX_REPEAT_OF_THE_SAME_CHARACTER_REQUIRED")) {
-                    if (usedCharacter.has_value() && randomChar == usedCharacter.value()) {
-                        ++repeatedCharacterCount.value();
-                    }
-                    else {
-                        repeatedCharacterCount = 0;
-                    }
+                else {
+                    repeatedSameCategoryCount = 0;
                 }
-                if (requires.at("MAX_REPEAT_OF_THE_SAME_CHARACTER_IN_DIFFERENT_CATEGORIES_REQUIRED")) {
-                    if (usedCharacter.has_value() && std::tolower(randomChar) == std::tolower(usedCharacter.value())) {
-                        ++repeatedCharacterInTheDifferentCategoriesCount.value();
-                    }
-                    else {
-                        repeatedCharacterInTheDifferentCategoriesCount.value() = 0;
-                    }
+            }
+            if (requires.at("MAX_REPEAT_OF_THE_SAME_CHARACTER_REQUIRED")) {
+                if (usedCharacter.has_value() && randomChar == usedCharacter.value()) {
+                    ++repeatedCharacterCount.value();
                 }
-                usedCategory = charset->GetCharset(randomChar);
-                usedCharacter = randomChar;
+                else {
+                    repeatedCharacterCount = 0;
+                }
+            }
+            if (requires.at("MAX_REPEAT_OF_THE_SAME_CHARACTER_IN_DIFFERENT_CATEGORIES_REQUIRED")) {
+                if (usedCharacter.has_value() && std::tolower(randomChar) == std::tolower(usedCharacter.value())) {
+                    ++repeatedCharacterInTheDifferentCategoriesCount.value();
+                }
+                else {
+                    repeatedCharacterInTheDifferentCategoriesCount.value() = 0;
+                }
+            }
+            usedCategory = charset->GetCharset(randomChar);
+            usedCharacter = randomChar;
         }
-
         return result;
     }
 }

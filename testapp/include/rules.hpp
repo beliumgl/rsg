@@ -1,0 +1,1 @@
+/home/belium/CLionProjects/RandomStringGenerator/include/rules.hpp
