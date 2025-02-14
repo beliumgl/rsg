@@ -1,5 +1,5 @@
 # Random String Generator
-A project written in C++17 that allows you to generate strings with different modes, different charsets, any length (that meats a range of course)
+A project written in C++17 that allows you to generate strings with different modes, different character sets, and any length (within a specified range).
 
 # Build
 ```
