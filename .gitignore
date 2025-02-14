@@ -1,4 +1,4 @@
 build/
 cmake-build-debug/
-*.kde4
-.kde4/
+*.kdev4
+.kdev4/
